@@ -9,7 +9,14 @@ const Lottie = dynamic(() => import("lottie-react"), {
     ssr: false,
 });
 
-export default function NeuronixLogoCore(props: any) {
+export default function NeuronixLogoCore({
+  small,
+  size,
+}: {
+  small?: boolean;
+  size?: string;
+}) {
+
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [animationData, setAnimationData] = useState<any>(null);
     const [useLottie, setUseLottie] = useState(true);
@@ -110,4 +117,5 @@ export default function NeuronixLogoCore(props: any) {
         </div>
     );
 }
+
 
