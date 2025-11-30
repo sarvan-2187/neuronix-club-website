@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function NeuronsBook() {
     const pages = [
-        "/carousel0.png",
+        "/Carousel0.png",
         "/carousel1.png",
         "/carousel2.png",
         "/carousel3.png",
@@ -90,4 +90,5 @@ export default function NeuronsBook() {
         </section>
     );
 }
+
 
