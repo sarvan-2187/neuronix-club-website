@@ -134,3 +134,21 @@ body {
 .mono {
   font-family: var(--font-mono), monospace !important;
 }
+
+
+.gold-label {
+  @apply block mb-1 font-semibold text-yellow-300 tracking-wide;
+}
+
+.gold-input {
+  @apply w-full px-4 py-3 rounded-xl bg-black/40 border border-yellow-500/20 text-neutral-200 outline-none transition;
+}
+
+.gold-input:focus {
+  @apply border-yellow-400 shadow-md;
+}
+
+.section-title {
+  @apply text-xl font-semibold text-yellow-300 mb-4;
+}
+
