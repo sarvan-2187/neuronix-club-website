@@ -15,7 +15,7 @@ export default function NeuronixFooter() {
                 <a
                     href="https://www.instagram.com/neuro.nixai25?igsh=Y2VydGRoOGt1ZG1u"
                     target="_blank"
-                    className="p-3 rounded-full border border-yellow-500/40 text-yellow-300 
+                    className="px-2 py-1.5 rounded-sm border border-yellow-500/40 text-yellow-300 
           hover:bg-yellow-400/10 hover:border-yellow-400 shadow-[0_0_8px_rgba(250,204,21,0.3)] 
           hover:shadow-[0_0_15px_rgba(250,204,21,0.5)] transition"
                 >
@@ -26,7 +26,7 @@ export default function NeuronixFooter() {
                 <a
                     href="https://www.linkedin.com/in/neuronix-ai-avv-07b35b381/"
                     target="_blank"
-                    className="p-3 rounded-full border border-yellow-500/40 text-yellow-300 
+                    className="px-2 py-1.5 rounded-sm border border-yellow-500/40 text-yellow-300 
           hover:bg-yellow-400/10 hover:border-yellow-400 shadow-[0_0_8px_rgba(250,204,21,0.3)] 
           hover:shadow-[0_0_15px_rgba(250,204,21,0.5)] transition"
                 >
@@ -36,7 +36,7 @@ export default function NeuronixFooter() {
                 {/* EMAIL */}
                 <a
                     href="mailto:Neuronix@ch.amrita.edu"
-                    className="p-3 rounded-full border border-yellow-500/40 text-yellow-300 
+                    className="px-2 py-1.5 rounded-sm border border-yellow-500/40 text-yellow-300 
           hover:bg-yellow-400/10 hover:border-yellow-400 shadow-[0_0_8px_rgba(250,204,21,0.3)] 
           hover:shadow-[0_0_15px_rgba(250,204,21,0.5)] transition"
                 >
