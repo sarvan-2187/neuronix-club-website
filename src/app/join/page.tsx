@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function AIClubRegistration() {
     const [result, setResult] = useState("");
@@ -26,7 +27,7 @@ export default function AIClubRegistration() {
             const data = await response.json();
 
             if (data.success) {
-                setResult("Application Submitted Successfully. Check your email for confirmation.");
+                setResult("Application Submitted Successfully. Will get back to you soon.");
                 setResultColor("text-green-400");
                 event.target.reset();
             } else {
@@ -199,7 +200,33 @@ export default function AIClubRegistration() {
                         Submit Registration
                     </button>
 
-                    <p className={`mt-3 font-medium ${resultColor}`}>{result}</p>
+                    {/* APPLE-STYLE ANIMATED RESULT */}
+                    <AnimatePresence mode="wait">
+                        {result && (
+                            <motion.p
+                                key={result}
+                                initial={{ opacity: 0, scale: 0.92, y: 10 }}
+                                animate={{
+                                    opacity: 1,
+                                    scale: 1,
+                                    y: 0,
+                                    transition: {
+                                        duration: 0.45,
+                                        ease: [0.16, 1, 0.3, 1], // Apple-style spring ease
+                                    },
+                                }}
+                                exit={{
+                                    opacity: 0,
+                                    scale: 0.97,
+                                    y: 6,
+                                    transition: { duration: 0.25 },
+                                }}
+                                className={`mt-3 text-center font-medium ${resultColor}`}
+                            >
+                                {result}
+                            </motion.p>
+                        )}
+                    </AnimatePresence>
                 </form>
             </div>
         </section>

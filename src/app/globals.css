@@ -152,3 +152,43 @@ body {
   @apply text-xl font-semibold text-yellow-300 mb-4;
 }
 
+
+@keyframes bgDotPulse {
+  0% {
+    opacity: 0.15;
+    filter: blur(6px);
+    background-color: #3b3b3b;
+  }
+
+  50% {
+    opacity: 0.45;
+    filter: blur(8px);
+    background-color: #facc15;
+  }
+
+  100% {
+    opacity: 0.15;
+    filter: blur(6px);
+    background-color: #3b3b3b;
+  }
+}
+
+.bg-dot {
+  animation: bgDotPulse 3s ease-in-out infinite;
+}
+
+.bg-dot:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.bg-dot:nth-child(3) {
+  animation-delay: 1.2s;
+}
+
+.bg-dot:nth-child(4) {
+  animation-delay: 1.8s;
+}
+
+.bg-dot:nth-child(5) {
+  animation-delay: 2.4s;
+}

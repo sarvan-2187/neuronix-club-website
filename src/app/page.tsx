@@ -5,16 +5,19 @@ import NeuronixHeader from "@/components/NeuronixHeader";
 import NeuronixHero from "@/components/NeuronixHero";
 import NeuronsBook from "@/components/NeuronsBook";
 
+import NeuronixLoader from "@/components/NeuronixLoader";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black">
-      <NeuronixHeader/>
+    <main className="min-h-screen bg-black relative">
+      <NeuronixLoader />
+
+      <NeuronixHeader />
       <NeuronixHero />
       <NeuronixAbout />
       <NeuronsBook />
       <NeuronixFAQ />
-      <NeuronixFooter/>
+      <NeuronixFooter />
     </main>
   );
 }
