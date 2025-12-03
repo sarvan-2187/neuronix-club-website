@@ -16,7 +16,7 @@ export default function AIClubRegistration() {
         formData.append("subject", "New AI Club Registration");
 
         try {
-            const response = await fetch("https://api.web3forms.com/v1/submit", {
+            const response = await fetch("https://api.web3forms.com/submit", {
                 method: "POST",
                 body: formData,
             });
