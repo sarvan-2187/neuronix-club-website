@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { Space_Grotesk } from "next/font/google";
+import RouteLoader from "@/components/RouteLoader";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -35,7 +36,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${spaceGrotesk.variable} antialiased`}
       >
-        {children}
+        <RouteLoader>
+          {children}
+      </RouteLoader>
+       
       </body>
     </html>
   );
