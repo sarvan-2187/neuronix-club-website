@@ -40,7 +40,7 @@ export default function NeuronixLoader() {
 
             {/* LOGO TILE */}
             <div className="w-40 h-20 rounded-2xl bg-neutral-900 flex items-center justify-center border border-neutral-800 shadow-[0_0_40px_rgba(255,200,0,0.08)] mb-8 relative z-10">
-                <img src="/logo.png" className="h-10 opacity-90 scale-110" />
+                <img src="/logo.png" className="h-10 opacity-90 scale-120" />
             </div>
 
             {/* PROGRESS BAR */}
