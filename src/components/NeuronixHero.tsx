@@ -57,7 +57,7 @@ export default function NeuronixHero() {
                             className="rounded-full border border-yellow-500/60 bg-yellow-500 text-black px-6 py-2 text-sm font-semibold shadow-[0_0_25px_rgba(250,204,21,0.5)] hover:bg-yellow-400 hover:shadow-[0_0_35px_rgba(250,204,21,0.75)] transition"
                             asChild
                         >
-                            <a href="#join">
+                            <a href="/join">
                                 Join Neuronix
                                 <ArrowRight className="ml-2 h-4 w-4" />
                             </a>
