@@ -16,7 +16,7 @@
     "keen-slider": "^6.8.6",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.555.0",
-    "next": "16.0.5",
+    "next": "^16.0.7",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-pageflip": "^2.0.3",
