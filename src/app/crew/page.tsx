@@ -108,20 +108,33 @@ export default function TeamPage() {
                                 {/* LEFT */}
                                 <div className="text-sm leading-6 w-2/3">
                                     <p className="text-neutral-400">Name:</p>
-                                    <p className="text-yellow-200 font-semibold text-lg">{m.name}</p>
+                                    <p className="text-yellow-200 font-semibold text-lg flex items-center gap-2">
+                                        {m.name}
+
+                                        {m.linkedin && (
+                                            <a href={m.linkedin} target="_blank">
+                                                <img src="/linkedin.svg" className="h-5 opacity-90 hover:opacity-100 transition" />
+                                            </a>
+                                        )}
+                                    </p>
 
                                     <p className="text-neutral-400 mt-3">Role:</p>
                                     <p className="text-yellow-300 font-medium">{m.role}</p>
 
                                     <p className="text-neutral-400 mt-3">Email:</p>
-                                    <div className="flex items-center gap-1 text-neutral-300">
-                                        <span className="text-[11px] break-all min-w-[250px]">{m.email}</span>
+                                    <div className="flex items-center gap-2 text-neutral-300">
+                                        <span className="text-[11px] whitespace-nowrap overflow-hidden text-ellipsis max-w-[210px]">
+                                            {m.email}
+                                        </span>
+
                                         <Copy
                                             size={14}
-                                            className="cursor-pointer hover:text-yellow-400"
+                                            className="cursor-pointer hover:text-yellow-400 flex-shrink-0"
                                             onClick={() => copyEmail(m.email)}
                                         />
                                     </div>
+
+
 
                                     {copied === m.email && (
                                         <p className="text-green-400 text-[10px] mt-1">Copied!</p>
@@ -134,12 +147,6 @@ export default function TeamPage() {
                                         src={m.image}
                                         className="w-24 h-24 rounded-md border border-yellow-500 object-cover shadow-lg"
                                     />
-
-                                    {m.linkedin && (
-                                        <a href={m.linkedin} target="_blank" className="flex justify-center mt-3">
-                                            <img src="/linkedin.svg" className="h-6 opacity-90 hover:opacity-100 transition" />
-                                        </a>
-                                    )}
                                 </div>
                             </div>
                         </div>
@@ -188,20 +195,33 @@ export default function TeamPage() {
                                 {/* LEFT SIDE */}
                                 <div className="text-sm leading-6 w-2/3">
                                     <p className="text-neutral-400">Name:</p>
-                                    <p className="text-yellow-200 font-semibold text-lg">{m.name}</p>
+                                    <p className="text-yellow-200 font-semibold text-lg flex items-center gap-2">
+                                        {m.name}
+
+                                        {m.linkedin && (
+                                            <a href={m.linkedin} target="_blank">
+                                                <img src="/linkedin.svg" className="h-5 opacity-90 hover:opacity-100 transition" />
+                                            </a>
+                                        )}
+                                    </p>
+
 
                                     <p className="text-neutral-400 mt-3">Role:</p>
                                     <p className="text-yellow-300">{m.role}</p>
 
                                     <p className="text-neutral-400 mt-3">Email:</p>
-                                    <div className="flex items-center gap-1 text-neutral-300">
-                                        <span className="text-[11px] break-all  min-w-[250px]">{m.email}</span>
+                                    <div className="flex items-center gap-2 text-neutral-300">
+                                        <span className="text-[11px] whitespace-nowrap overflow-hidden text-ellipsis max-w-[210px]">
+                                            {m.email}
+                                        </span>
+
                                         <Copy
                                             size={14}
-                                            className="cursor-pointer hover:text-yellow-400"
+                                            className="cursor-pointer hover:text-yellow-400 flex-shrink-0"
                                             onClick={() => copyEmail(m.email)}
                                         />
                                     </div>
+
 
                                     {copied === m.email && (
                                         <p className="text-green-400 text-[10px] mt-1">Copied!</p>
@@ -214,12 +234,6 @@ export default function TeamPage() {
                                         src={m.image}
                                         className="w-24 h-24 rounded-md border border-yellow-400 object-cover shadow-md"
                                     />
-
-                                    {m.linkedin && (
-                                        <a href={m.linkedin} target="_blank" className="flex justify-center mt-3">
-                                            <img src="/linkedin.svg" className="h-6 opacity-90 hover:opacity-100 transition" />
-                                        </a>
-                                    )}
                                 </div>
                             </div>
 
