@@ -56,7 +56,7 @@ export default function TeamPage() {
     };
 
     return (
-        <section className="min-h-screen w-full bg-[linear-gradient(135deg,#0f0f0f_25%,#151515_25%,#151515_50%,#0f0f0f_50%,#0f0f0f_75%,#151515_75%,#151515_100%)] bg-[length:20px_20px] text-neutral-200 flex justify-center px-5 py-16">
+        <section className="min-h-screen w-full bg-black text-neutral-200 flex justify-center px-5 py-16">
             <div className="max-w-6xl w-full">
 
                 {/* HEADER */}

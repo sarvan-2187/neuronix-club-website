@@ -5,10 +5,10 @@ import Image from "next/image";
 import { Menu, X, Home, Info, Sparkles, CircleHelp } from "lucide-react";
 
 const navItems = [
-    { id: "hero", label: "Home", icon: <Home className="w-4 h-4" /> },
-    { id: "about", label: "About", icon: <Info className="w-4 h-4" /> },
-    { id: "crew", label: "Crew", icon: <Sparkles className="w-4 h-4" /> },
-    { id: "faq", label: "FAQs", icon: <CircleHelp className="w-4 h-4" /> },
+    { id: "hero", label: "Home", icon: <Home className="w-4 h-4" />, external: false },
+    { id: "about", label: "About", icon: <Info className="w-4 h-4" />, external: false },
+    { id: "crew", label: "Crew", icon: <Sparkles className="w-4 h-4" />, external: true }, // Opens /crew
+    { id: "faq", label: "FAQs", icon: <CircleHelp className="w-4 h-4" />, external: false },
 ];
 
 export default function NeuronixHeader() {
@@ -22,18 +22,28 @@ export default function NeuronixHeader() {
         return () => window.removeEventListener("scroll", scroll);
     }, []);
 
-    const scrollToSection = (id: string) => (e: any) => {
+    const handleNavClick = (item: any) => (e: any) => {
         e.preventDefault();
-        const el = document.getElementById(id);
+
+        // If Crew → navigate to /crew page
+        if (item.external) {
+            window.location.href = "/crew";
+            setIsOpen(false);
+            return;
+        }
+
+        // INTERNAL scroll
+        const el = document.getElementById(item.id);
         if (!el) return;
+
         window.scrollTo({ top: el.offsetTop - 90, behavior: "smooth" });
-        setActive(id);
+        setActive(item.id);
         setIsOpen(false);
     };
 
     return (
         <>
-            {/* Header Container */}
+            {/* HEADER */}
             <header
                 className={`fixed top-3 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-6xl
                 px-3 sm:px-4 py-2 rounded-2xl
@@ -56,13 +66,14 @@ export default function NeuronixHeader() {
                         {navItems.map((item) => (
                             <a
                                 key={item.id}
-                                href={`#${item.id}`}
-                                onClick={scrollToSection(item.id)}
+                                href={item.external ? "/crew" : `#${item.id}`}
+                                onClick={handleNavClick(item)}
                                 className={`px-3 py-2 text-sm rounded-xl flex items-center gap-2 transition-all
-                                border border-transparent
-                                ${active === item.id
+                                    border border-transparent
+                                    ${active === item.id && !item.external
                                         ? "text-black bg-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.6)]"
-                                        : "text-yellow-300/80 hover:text-yellow-300 hover:border-yellow-400/50 hover:bg-yellow-400/10"}
+                                        : "text-yellow-300/80 hover:text-yellow-300 hover:border-yellow-400/50 hover:bg-yellow-400/10"
+                                    }
                                 `}
                             >
                                 {item.icon}
@@ -82,7 +93,7 @@ export default function NeuronixHeader() {
                 </nav>
             </header>
 
-            {/* MOBILE MENU */}
+            {/* MOBILE NAV MENU */}
             {isOpen && (
                 <>
                     <div
@@ -95,13 +106,14 @@ export default function NeuronixHeader() {
                             {navItems.map((item) => (
                                 <a
                                     key={item.id}
-                                    href={`#${item.id}`}
-                                    onClick={scrollToSection(item.id)}
+                                    href={item.external ? "/crew" : `#${item.id}`}
+                                    onClick={handleNavClick(item)}
                                     className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition
-                                    ${active === item.id
+                                    ${active === item.id && !item.external
                                             ? "bg-yellow-400 text-black shadow-[0_0_10px_rgba(250,204,21,0.4)]"
-                                            : "text-yellow-300/80 hover:bg-yellow-400/10 hover:text-yellow-300"}
-                                    `}
+                                            : "text-yellow-300/80 hover:bg-yellow-400/10 hover:text-yellow-300"
+                                        }
+                                `}
                                 >
                                     {item.icon}
                                     {item.label}
@@ -110,7 +122,7 @@ export default function NeuronixHeader() {
                         </div>
                     </div>
 
-                    {/* BG Overlay */}
+                    {/* DARK OVERLAY */}
                     <div
                         className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30"
                         onClick={() => setIsOpen(false)}
@@ -118,7 +130,7 @@ export default function NeuronixHeader() {
                 </>
             )}
 
-            {/* ANIMATION STYLE */}
+            {/* ANIMATION */}
             <style>{`
                 @keyframes slideDown {
                     0% { opacity: 0; transform: translateY(-10px); }
