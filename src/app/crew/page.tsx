@@ -63,7 +63,7 @@ export default function TeamPage() {
                 <div className="text-center mb-16">
                     <img src="/logo.png" className="h-20 mx-auto opacity-90" />
                     <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-200 text-transparent bg-clip-text mt-4">
-                        Neuronix Club • Team 2025
+                        Crew 2025
                     </h1>
                     <p className="text-neutral-500 mt-2">Meet the people who make it happen</p>
                 </div>
@@ -195,7 +195,7 @@ export default function TeamPage() {
 
                                     <p className="text-neutral-400 mt-3">Email:</p>
                                     <div className="flex items-center gap-1 text-neutral-300">
-                                        <span className="text-[11px] break-all">{m.email}</span>
+                                        <span className="text-[11px] break-all  min-w-[250px]">{m.email}</span>
                                         <Copy
                                             size={14}
                                             className="cursor-pointer hover:text-yellow-400"
