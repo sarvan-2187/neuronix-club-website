@@ -115,7 +115,7 @@ export default function TeamPage() {
 
                                     <p className="text-neutral-400 mt-3">Email:</p>
                                     <div className="flex items-center gap-1 text-neutral-300">
-                                        <span className="text-[11px] ">{m.email}</span>
+                                        <span className="text-[11px] break-all min-w-[250px]">{m.email}</span>
                                         <Copy
                                             size={14}
                                             className="cursor-pointer hover:text-yellow-400"
