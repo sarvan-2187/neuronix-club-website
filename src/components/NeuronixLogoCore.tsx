@@ -36,7 +36,7 @@ export default function NeuronixLogoCore({
     useEffect(() => {
         const loadAnim = async () => {
             try {
-                const res = await fetch("/scanner.json");
+                const res = await fetch("/robo.json");
                 const text = await res.text();
                 setAnimationData(JSON.parse(text));
             } catch (_) {
