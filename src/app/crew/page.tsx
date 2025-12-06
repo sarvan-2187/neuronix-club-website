@@ -38,7 +38,7 @@ const teamMembers: Member[] = [
     { name: "Sairaman", role: "Coordinator", email: "ch.sc.u4aie23010@ch.students.amrita.edu", linkedin: "https://www.linkedin.com/in/sai-raman-d-0b1917342", image: "/sairaman.png", logo: "/logo.png" },
     { name: "Sanjjey", role: "Coordinator", email: "ch.sc.u4aie23050@ch.students.amrita.edu", linkedin: "https://www.linkedin.com/in/sanjjeyarumugam/", image: "/sanjjey.png", logo: "/logo.png" },
     { name: "Sriharivasan", role: "Coordinator", email: "ch.sc.u4aie23053@ch.students.amrita.edu", linkedin: "https://www.linkedin.com/in/sri-hari-vasan-5bb058285/", image: "/sriharivasan.png", logo: "/logo.png" },
-    { name: "Tinku", role: "Coordinator", email: "ch.sc.u4cys23040@ch.students.amrita.edu", linkedin: "https://www.linkedin.com/in/tinku-sriram-389153290/", image: "/tinku.png", logo: "/logo.png" },
+    { name: "Tinku Sriram", role: "Coordinator", email: "ch.sc.u4cys23040@ch.students.amrita.edu", linkedin: "https://www.linkedin.com/in/tinku-sriram-389153290/", image: "/tinku.png", logo: "/logo.png" },
     { name: "Vigneshwarran", role: "Coordinator", email: "ch.sc.u4aie23061@ch.students.amrita.edu", linkedin: "https://www.linkedin.com/in/vigneshwarran-s-82084b287", image: "/vigneshwarran.png", logo: "/logo.png" },
 ];
 
