@@ -61,7 +61,7 @@ export default function TeamPage() {
 
                 {/* HEADER */}
                 <div className="text-center mb-16">
-                    <img src="/logo.png" className="h-20 mx-auto opacity-90" />
+                    <img src="/favicon.ico" className="h-20 mx-auto opacity-90" />
                     <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-200 text-transparent bg-clip-text mt-4">
                         Crew 2025
                     </h1>
