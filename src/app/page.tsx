@@ -15,7 +15,6 @@ export default function Home() {
       <NeuronixHeader />
       <NeuronixHero />
       <NeuronixAbout />
-      <NeuronsBook />
       <NeuronixFAQ />
       <NeuronixFooter />
     </main>
