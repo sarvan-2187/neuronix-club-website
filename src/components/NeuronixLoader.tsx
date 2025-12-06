@@ -52,7 +52,7 @@ export default function NeuronixLoader() {
             </div>
 
             <p className="text-neutral-500 mt-3 text-sm tracking-wide relative z-10">
-                Loading {progress}%
+                Neural Engine booting {progress}%
             </p>
         </div>
     );

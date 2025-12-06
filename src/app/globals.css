@@ -192,3 +192,72 @@ body {
 .bg-dot:nth-child(5) {
   animation-delay: 2.4s;
 }
+
+/* AI CHIP GLOW PULSE */
+@keyframes chipGlow {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 200, 0, 0.05);
+    border-color: rgba(255, 200, 0, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 35px rgba(255, 200, 0, 0.25);
+    border-color: rgba(255, 200, 0, 0.45);
+  }
+
+  100% {
+    box-shadow: 0 0 20px rgba(255, 200, 0, 0.05);
+    border-color: rgba(255, 200, 0, 0.2);
+  }
+}
+
+.chip-animate {
+  animation: chipGlow 2.5s ease-in-out infinite;
+}
+
+/* AI GRID BACKDROP */
+@keyframes gridPulse {
+
+  0%,
+  100% {
+    opacity: 0.06;
+    transform: scale(1)
+  }
+
+  50% {
+    opacity: 0.15;
+    transform: scale(1.03)
+  }
+}
+
+.ai-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px),
+    linear-gradient(90deg,
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px);
+  background-size: 40px 40px;
+  animation: gridPulse 3s ease-in-out infinite;
+}
+
+/* NEURAL-CIRCUIT PULSE */
+@keyframes circuitFlow {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: translateX(0px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+}
+
+.circuit-line {
+  animation: circuitFlow 1.8s ease-in-out infinite;
+}
