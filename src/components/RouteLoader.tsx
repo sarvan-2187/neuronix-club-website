@@ -9,6 +9,7 @@ export default function RouteLoader({ children }: { children: React.ReactNode })
     // Routes that should show the loader
     const showLoader =
         pathname === "/join" ||
+        pathname === "/crew" ||
         pathname === "/events";
 
     return (

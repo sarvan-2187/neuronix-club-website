@@ -28,6 +28,7 @@ export default function NeuronixLogoCore({
         const move = (e: MouseEvent) => {
             setMousePos({ x: e.clientX, y: e.clientY });
         };
+        console.log("Coming Soon");
         window.addEventListener("mousemove", move);
         return () => window.removeEventListener("mousemove", move);
     }, []);
