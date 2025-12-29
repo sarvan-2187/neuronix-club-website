@@ -2,6 +2,15 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+
+/* ---------- VALIDATORS ---------- */
+const isValidLink = (value: string | null) => {
+    if (!value) return false;
+    const v = value.trim();
+    if (v === "" || ["N/A", "NA"].includes(v.toUpperCase())) return false;
+    return v.startsWith("http://") || v.startsWith("https://");
+};
 
 export default function AIClubRegistration() {
     const [result, setResult] = useState("");
@@ -9,48 +18,99 @@ export default function AIClubRegistration() {
 
     const onSubmit = async (event: any) => {
         event.preventDefault();
+
+        const form = new FormData(event.target);
+
+        /* ---------- LINK VALIDATION ---------- */
+        const github = form.get("github") as string;
+        const linkedin = form.get("linkedin") as string;
+        const resume = form.get("resume_link") as string | null;
+
+        if (!isValidLink(github)) {
+            setResult("Please enter a valid GitHub profile link.");
+            setResultColor("text-red-400");
+            return;
+        }
+
+        if (!isValidLink(linkedin)) {
+            setResult("Please enter a valid LinkedIn profile link.");
+            setResultColor("text-red-400");
+            return;
+        }
+
+        if (resume && resume.trim() !== "" && !isValidLink(resume)) {
+            setResult("Resume link must be a valid Google Drive URL.");
+            setResultColor("text-red-400");
+            return;
+        }
+
         setResult("Submitting your application...");
         setResultColor("text-yellow-300");
 
-        const formData = new FormData(event.target);
-        formData.append("access_key", "bf1842c7-9fff-4525-94b3-f56e783f658a");
-        formData.append("subject", "New AI Club Registration");
+        const payload = {
+            name: form.get("name"),
+            roll_number: form.get("roll_number"),
+            email: form.get("email"),
+            phone: form.get("phone"),
+            year: form.get("year"),
+            knowledge_level: form.get("knowledge_level"),
+            languages: form.getAll("languages"),
+            github,
+            linkedin,
+            resume_link: resume,
+            interests: form.getAll("interests"),
+            motivation: form.get("motivation"),
+        };
 
         try {
-            const response = await fetch("https://api.web3forms.com/submit", {
+            const res = await fetch("/api/ai-club-register", {
                 method: "POST",
-                body: formData,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
             });
 
-            if (!response.ok) throw new Error("network_blocked");
-
-            const data = await response.json();
-
-            if (data.success) {
-                setResult("Application Submitted Successfully. Will get back to you soon.");
-                setResultColor("text-green-400");
-                event.target.reset();
-            } else {
-                setResult(data.message || "Something went wrong.");
-                setResultColor("text-red-400");
+            if (!res.ok) {
+                if (res.status === 0) {
+                    throw new Error("network_blocked");
+                }
+                throw new Error("server_error");
             }
+
+            setResult("Application submitted successfully! 🎉");
+            setResultColor("text-green-400");
+            event.target.reset();
         } catch (error: any) {
-            if (error.message === "network_blocked") {
-                setResult("Your network is blocking the request. Switch to mobile data and try again.");
+            if (!navigator.onLine || error.message === "network_blocked") {
+                setResult(
+                    "Your network seems to be blocking the request. Please switch to mobile data or try a different Wi-Fi."
+                );
             } else {
-                setResult("Unable to submit. Please check your network and try again.");
+                setResult(
+                    "Unable to submit right now. Please try again after some time."
+                );
             }
             setResultColor("text-red-400");
         }
     };
+
 
     return (
         <section
             className="min-h-screen w-full bg-black text-neutral-200 flex justify-center px-5 py-16"
             style={{ fontFamily: "var(--font)" }}
         >
+            <Link
+                href="/"
+                className="fixed top-6 left-4 sm:left-6 z-20
+                bg-neutral-900/70 border border-yellow-500/30
+                text-yellow-300 px-4 py-2 rounded-xl text-sm sm:text-base
+                hover:bg-yellow-500 hover:text-black
+                transition shadow-[0_0_15px_rgba(255,200,0,0.25)]"
+            >
+                ← Back to Home
+            </Link>
             <div className="max-w-2xl w-full bg-neutral-900/60 border border-yellow-500/20 rounded-2xl p-10 shadow-[0_0_35px_rgba(255,200,0,0.15)] backdrop-blur">
-
+                
                 {/* LOGO */}
                 <div className="flex justify-center mb-6">
                     <img
