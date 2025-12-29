@@ -1,8 +1,43 @@
-"use client";
+import { pool } from "@/lib/db";
 
-import Image from "next/image";
+type Event = {
+    id: number;
+    title: string;
+    description: string;
+    registration_link: string;
+    banner_url: string;
+};
 
-export default function ComingSoonEvents() {
+export const revalidate = 300; // 5 minutes cache
+
+async function getEvents(): Promise<{
+    events: Event[];
+    networkError: boolean;
+}> {
+    try {
+        const result = await pool.query(`
+      SELECT id, title, description, registration_link, banner_url
+      FROM events
+      ORDER BY created_at DESC
+    `);
+
+        return {
+            events: result.rows,
+            networkError: false,
+        };
+    } catch (error) {
+        console.error("NEON CONNECTION ERROR:", error);
+
+        return {
+            events: [],
+            networkError: true,
+        };
+    }
+}
+
+export default async function EventsPage() {
+    const { events, networkError } = await getEvents();
+
     return (
         <section className="min-h-screen w-full bg-black flex flex-col items-center text-center px-6 py-16 relative overflow-hidden">
 
@@ -13,9 +48,11 @@ export default function ComingSoonEvents() {
             </div>
 
             {/* PAGE TITLE */}
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-wide
-                bg-gradient-to-r from-yellow-300 via-yellow-200 to-yellow-500
-                bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(255,200,0,0.4)]">
+            <h1
+                className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-wide
+        bg-gradient-to-r from-yellow-300 via-yellow-200 to-yellow-500
+        bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(255,200,0,0.4)]"
+            >
                 Neuronix Events
             </h1>
 
@@ -23,80 +60,90 @@ export default function ComingSoonEvents() {
                 Major technical events from the Neuronix Club
             </p>
 
-            {/* EVENT CARD */}
-            <div className="mt-16 bg-neutral-900/60 border border-yellow-500/30 rounded-2xl p-8 max-w-3xl w-full
-                backdrop-blur-md shadow-[0_0_25px_rgba(255,200,0,0.15)]">
+            {/* NETWORK ERROR MESSAGE */}
+            {networkError && (
+                <div
+                    className="mt-12 bg-red-900/30 border border-red-500/30
+          rounded-2xl px-8 py-6 backdrop-blur-md
+          shadow-[0_0_20px_rgba(255,80,80,0.15)] max-w-xl"
+                >
+                    <h2 className="text-2xl font-semibold text-red-300">
+                        Network Restriction Detected
+                    </h2>
 
-                {/* POSTER */}
-                <div className="flex justify-center">
-                    <img
-                        src="/hackaruckus.jpg"
-                        alt="Hack-A-Ruckus Poster"
-                        className="rounded-2xl border border-yellow-500/20 w-full max-w-lg shadow-[0_0_20px_rgba(255,215,0,0.15)]"
-                    />
+                    <p className="mt-3 text-neutral-200 leading-relaxed">
+                        Your current network appears to be blocking access to our event servers.
+                    </p>
+
+                    <p className="mt-2 text-neutral-300">
+                        Please switch to{" "}
+                        <span className="text-red-300 font-medium">mobile data</span> or connect
+                        to a different Wi-Fi network, then refresh the page.
+                    </p>
                 </div>
+            )}
 
-                {/* EVENT TITLE */}
-                <h2 className="text-4xl font-bold text-yellow-300 mt-8 tracking-wide">
-                    Hack-A-Ruckus 2.0
-                </h2>
+            {/* EVENTS / FALLBACK */}
+            {!networkError && events.length === 0 && (
+                <div
+                    className="mt-20 bg-neutral-900/40 border border-yellow-500/20
+          rounded-2xl px-10 py-8 backdrop-blur-md
+          shadow-[0_0_20px_rgba(255,200,0,0.15)] max-w-xl"
+                >
+                    <h2 className="text-3xl md:text-4xl font-semibold text-yellow-200">
+                        Events are Coming Soon
+                    </h2>
 
-                {/* EVENT DESCRIPTION */}
-                <p className="text-neutral-300 mt-4 leading-relaxed text-lg">
-                    The Neuronix Club announces the second edition of its flagship competitive programming
-                    event. Featuring high-pressure challenges designed to test logic, adaptability, and
-                    problem-solving under unpredictable constraints.
-                </p>
-
-                {/* DETAILS */}
-                <div className="text-neutral-200 mt-6 text-left space-y-2 text-lg">
-                    <p><span className="font-semibold text-yellow-300">Event 1:</span> FIASCOde 2.0 – reverse logic debugging challenge</p>
-                    <p><span className="font-semibold text-yellow-300">Event 2:</span> Random(Compile) 2.0 – compiler-shuffled coding round</p>
-                    <p><span className="font-semibold text-yellow-300">Prize Pool:</span> ₹20,000+</p>
-                    <p><span className="font-semibold text-yellow-300">Event Dates:</span> 18 and 19 December 2025</p>
-                    <p><span className="font-semibold text-yellow-300">Prelims Deadline:</span> 3 December 2025</p>
-                    <p><span className="font-semibold text-yellow-300">Registration:</span> Free</p>
+                    <p className="mt-4 text-neutral-300 leading-relaxed">
+                        Please stay tuned.
+                    </p>
                 </div>
+            )}
 
-                {/* BUTTONS */}
-                <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                    <a
-                        href="https://unstop.com/o/AEJeKSC?lb=gOD6yaho"
-                        target="_blank"
-                        className="px-6 py-3 bg-yellow-500 text-black rounded-xl font-semibold
-                            hover:bg-yellow-400 transition shadow-[0_0_15px_rgba(255,200,0,0.3)]"
+            {/* EVENT CARDS */}
+            {!networkError &&
+                events.map((event) => (
+                    <div
+                        key={event.id}
+                        className="mt-16 bg-neutral-900/60 border border-yellow-500/30
+            rounded-2xl p-8 max-w-3xl w-full backdrop-blur-md
+            shadow-[0_0_25px_rgba(255,200,0,0.15)]"
                     >
-                        Register for FIASCOde
-                    </a>
+                        {/* POSTER */}
+                        <div className="flex justify-center">
+                            <img
+                                src={event.banner_url}
+                                alt={event.title}
+                                className="rounded-2xl border border-yellow-500/20
+                w-full max-w-lg shadow-[0_0_20px_rgba(255,215,0,0.15)]"
+                            />
+                        </div>
 
-                    <a
-                        href="https://unstop.com/o/SJDlc56?lb=gOD6yaho"
-                        target="_blank"
-                        className="px-6 py-3 bg-yellow-500 text-black rounded-xl font-semibold
-                            hover:bg-yellow-400 transition shadow-[0_0_15px_rgba(255,200,0,0.3)]"
-                    >
-                        Register for Random(Compile)
-                    </a>
-                </div>
-            </div>
+                        {/* TITLE */}
+                        <h2 className="text-4xl font-bold text-yellow-300 mt-8 tracking-wide">
+                            {event.title}
+                        </h2>
 
-            {/* COMING SOON SECTION */}
-            <div className="mt-20 bg-neutral-900/40 border border-yellow-500/20
-                rounded-2xl px-10 py-8 backdrop-blur-md shadow-[0_0_20px_rgba(255,200,0,0.15)] max-w-xl">
+                        {/* DESCRIPTION */}
+                        <p className="text-neutral-300 mt-4 leading-relaxed text-lg">
+                            {event.description}
+                        </p>
 
-                <h2 className="text-3xl md:text-4xl font-semibold text-yellow-200">
-                    More Events Coming Soon
-                </h2>
-
-                <p className="mt-4 text-neutral-300 leading-relaxed">
-                    Additional Neuronix technical events for the 2025–2026 academic year are under
-                    preparation. The schedule will be released shortly.
-                </p>
-
-                <p className="mt-3 text-neutral-400 italic">
-                    Stay tuned for official announcements.
-                </p>
-            </div>
+                        {/* CTA */}
+                        <div className="mt-8 flex justify-center">
+                            <a
+                                href={event.registration_link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-6 py-3 bg-yellow-500 text-black
+                rounded-xl font-semibold hover:bg-yellow-400
+                transition shadow-[0_0_15px_rgba(255,200,0,0.3)]"
+                            >
+                                Register Now
+                            </a>
+                        </div>
+                    </div>
+                ))}
 
             {/* FOOTER */}
             <p className="mt-16 text-neutral-500 text-sm tracking-wide">
