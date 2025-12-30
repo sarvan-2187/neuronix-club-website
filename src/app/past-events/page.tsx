@@ -1,6 +1,7 @@
 "use client";
 
 import EventCarousel from "@/components/EventCarousel";
+import Link from "next/link";
 
 const EVENTS = [
     {
@@ -67,4 +68,5 @@ export default function PastEventsPage() {
     );
 
 }
+
 
