@@ -28,6 +28,16 @@ export default function PastEventsPage() {
 
             {/* PAGE TITLE */}
             <div className="relative z-10">
+                <Link
+                href="/"
+                className="fixed top-6 left-4 sm:left-6 z-20
+                bg-neutral-900/70 border border-yellow-500/30
+                text-yellow-300 px-4 py-2 rounded-xl text-sm sm:text-base
+                hover:bg-yellow-500 hover:text-black
+                transition shadow-[0_0_15px_rgba(255,200,0,0.25)]"
+            >
+                ← Back to Home
+            </Link>
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-400 text-center mb-4 animate-fade-in px-4">
                     Past Events
                 </h1>
@@ -55,4 +65,5 @@ export default function PastEventsPage() {
             `}</style>
         </section>
     );
+
 }
