@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { Menu, X, Home, Info, Sparkles, CircleHelp } from "lucide-react";
+import { Menu, X, Home, Info, Sparkles, ImageDown } from "lucide-react";
 
 const navItems = [
     { id: "hero", label: "Home", icon: <Home className="w-4 h-4" />, external: false },
     { id: "about", label: "About", icon: <Info className="w-4 h-4" />, external: false },
-    { id: "crew", label: "Crew", icon: <Sparkles className="w-4 h-4" />, external: true }, // Opens /crew
-    { id: "faq", label: "FAQs", icon: <CircleHelp className="w-4 h-4" />, external: false },
+    { id: "crew", label: "Crew", icon: <Sparkles className="w-4 h-4" />, external: true, href: "/crew" },
+    { id: "past-events", label: "Gallery", icon: <ImageDown className="w-4 h-4" />, external: true, href: "/past-events" },
 ];
 
 export default function NeuronixHeader() {
@@ -25,9 +25,9 @@ export default function NeuronixHeader() {
     const handleNavClick = (item: any) => (e: any) => {
         e.preventDefault();
 
-        // If Crew → navigate to /crew page
-        if (item.external) {
-            window.location.href = "/crew";
+        // If external link → navigate to the specified page
+        if (item.external && item.href) {
+            window.location.href = item.href;
             setIsOpen(false);
             return;
         }
@@ -66,7 +66,7 @@ export default function NeuronixHeader() {
                         {navItems.map((item) => (
                             <a
                                 key={item.id}
-                                href={item.external ? "/crew" : `#${item.id}`}
+                                href={item.external ? item.href : `#${item.id}`}
                                 onClick={handleNavClick(item)}
                                 className={`px-3 py-2 text-sm rounded-xl flex items-center gap-2 transition-all
                                     border border-transparent
@@ -106,7 +106,7 @@ export default function NeuronixHeader() {
                             {navItems.map((item) => (
                                 <a
                                     key={item.id}
-                                    href={item.external ? "/crew" : `#${item.id}`}
+                                    href={item.external ? item.href : `#${item.id}`}
                                     onClick={handleNavClick(item)}
                                     className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition
                                     ${active === item.id && !item.external
